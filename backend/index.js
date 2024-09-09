@@ -5,44 +5,23 @@ const cors = require('cors');
 const requestIp = require('request-ip');
 require('dotenv').config();
 
-
 const app = express();
-app.use(cors({
-  origin: '*', 
-}));
+app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 
-// Conexión a la base de datos MySQL
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 10000,
-  connectTimeout: 10000 
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-
-console.log('Database config:', {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});
-
-
-db.connect((err) => {
-  if (err) {
-    console.error('Error conectando a MySQL:', err.stack);
-    return;
-  }
-  console.log('Conectado a MySQL');
-});
-
-// Middleware para obtener la IP del cliente
 app.use(requestIp.mw());
 
-// Endpoint para verificar la cédula en la tabla users
 app.post('/verificar-cedula', (req, res) => {
   const { cedula } = req.body;
 
@@ -66,24 +45,36 @@ app.post('/verificar-cedula', (req, res) => {
   });
 });
 
-// Endpoint para guardar registro de entrada/salida con coordenadas
 app.post('/guardar-registro', (req, res) => {
   const { cedula, opcion, lugar, latitud, longitud } = req.body;
-  const ip = req.clientIp; // Obtener la IP del cliente
+  const ip = req.clientIp;
+
+
+  if (!cedula || !opcion || !lugar || !latitud || !longitud) {
+    return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+  }
+
+
+  console.log('Datos recibidos en el backend:', {
+    cedula,
+    opcion,
+    lugar,
+    latitud,
+    longitud,
+    ip
+  });
 
   const query = 'INSERT INTO loggs (cedula, shift, place, latitud, longitud, ip) VALUES (?, ?, ?, ?, ?, ?)';
-  db.query(query, [cedula, opcion, lugar, latitud, longitud, ip], (err, results) => {
+  db.query(query, [cedula, opcion, lugar, latitud, longitud, ip], (err) => {
     if (err) {
       console.error('Error insertando datos:', err);
       return res.status(500).json({ success: false, message: 'Error guardando los datos' });
     }
-      
     res.json({ success: true, message: 'Registro guardado exitosamente' });
   });
 });
 
 const PORT = process.env.PORT || 10000;
-
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

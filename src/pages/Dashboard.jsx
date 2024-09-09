@@ -56,6 +56,14 @@ export default function Dashboard() {
       return;
     }
 
+    console.log('Datos enviados al backend:', {
+      cedula: userName,
+      opcion: registro,
+      lugar: lugarIntegraciones,
+      latitud,
+      longitud
+    });
+
     try {
       const response = await axios.post(API_URL, {
         cedula: userName,
@@ -96,7 +104,7 @@ export default function Dashboard() {
 
         <form className="mt-4" onSubmit={handleEnviar}>
           <div className="mb-4 text-left">
-            <label htmlFor="tipo-registro" className="block text-sm font-medium text-black-100">Turno: </label>
+            <label htmlFor="tipo-registro" className="block text-sm font-medium text-black-100">Reporte: </label>
             <select
               value={registro}
               onChange={(e) => setRegistro(e.target.value)}
