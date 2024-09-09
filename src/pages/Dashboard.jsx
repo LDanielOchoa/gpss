@@ -98,9 +98,10 @@ export default function Dashboard() {
             type="text"
             value={userName || 'Cédula no registrada'}
             readOnly
-            className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="bg-white text-gray-500 border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
+
 
         <form className="mt-4" onSubmit={handleEnviar}>
           <div className="mb-4 text-left">
@@ -108,12 +109,12 @@ export default function Dashboard() {
             <select
               value={registro}
               onChange={(e) => setRegistro(e.target.value)}
-              className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-black" // Fondo blanco y texto negro
               required
             >
-              <option value="">Selecciona una opciòn</option>
-              <option value="entrada">Entrada</option>
-              <option value="salida">Salida</option>
+              <option value="" className="bg-white text-black">Selecciona una opción</option>
+              <option value="entrada" className="bg-white text-black">Entrada</option>
+              <option value="salida" className="bg-white text-black">Salida</option>
             </select>
           </div>
 
@@ -122,20 +123,20 @@ export default function Dashboard() {
             <select
               value={lugarIntegraciones}
               onChange={(e) => setLugarIntegraciones(e.target.value)}
-              className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-black" // Fondo blanco y texto negro
               required
             >
-              <option value="">Seleccione una opción</option>
-              <option value="praocc">PRAOCC</option>
-              <option value="praori">PRAORI</option>
-              <option value="ossur">HOSSUR</option>
-              <option value="ace">ACE</option>
-              <option value="lay">LAY</option>
-              <option value="tri">TRI</option>
-              <option value="hosnor">HOSNOR</option>
-              <option value="exp">EXP</option>
-              <option value="lauva">LAUVA</option>
-              <option value="san">SAN</option>
+              <option value="" className="bg-white text-black">Seleccione una opción</option>
+              <option value="praocc" className="bg-white text-black">PRAOCC</option>
+              <option value="praori" className="bg-white text-black">PRAORI</option>
+              <option value="ossur" className="bg-white text-black">HOSSUR</option>
+              <option value="ace" className="bg-white text-black">ACE</option>
+              <option value="lay" className="bg-white text-black">LAY</option>
+              <option value="tri" className="bg-white text-black">TRI</option>
+              <option value="hosnor" className="bg-white text-black">HOSNOR</option>
+              <option value="exp" className="bg-white text-black">EXP</option>
+              <option value="lauva" className="bg-white text-black">LAUVA</option>
+              <option value="san" className="bg-white text-black">SAN</option>
             </select>
           </div>
 
