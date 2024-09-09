@@ -88,7 +88,7 @@ export default function Dashboard() {
   };
 
   return (
-    <Background className="min-h-screen flex items-center justify-center bg-black-100">
+    <Background className="min-h-screen flex items-center justify-center bg-gray-300">
       <div className="bg-card w-full max-w-md p-8 rounded-lg text-center">
         <Logo className="mb-6 mx-auto" />
 
@@ -111,6 +111,7 @@ export default function Dashboard() {
               className="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-green-500"
               required
             >
+              <option value="">Selecciona una opciòn</option>
               <option value="entrada">Entrada</option>
               <option value="salida">Salida</option>
             </select>
