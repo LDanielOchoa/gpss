@@ -22,6 +22,16 @@ const db = mysql.createPool({
 
 app.use(requestIp.mw());
 
+// Ruta para la raíz GET
+app.get('/', (req, res) => {
+  res.send('Bienvenido a la API de GPSs');
+});
+
+// Ruta para la raíz POST
+app.post('/', (req, res) => {
+  res.status(200).json({ message: 'Solicitud POST recibida en la raíz' });
+});
+
 app.post('/verificar-cedula', (req, res) => {
   const { cedula } = req.body;
 
@@ -49,11 +59,9 @@ app.post('/guardar-registro', (req, res) => {
   const { cedula, opcion, lugar, latitud, longitud } = req.body;
   const ip = req.clientIp;
 
-
   if (!cedula || !opcion || !lugar || !latitud || !longitud) {
     return res.status(400).json({ error: 'Todos los campos son obligatorios' });
   }
-
 
   console.log('Datos recibidos en el backend:', {
     cedula,
