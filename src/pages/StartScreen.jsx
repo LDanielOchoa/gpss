@@ -4,7 +4,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
-import Button from '../components/Button';
 
 const StartScreen = () => {
   const navigate = useNavigate();
@@ -13,11 +12,18 @@ const StartScreen = () => {
     <Background className="flex flex-col items-center justify-center min-h-screen p-4">
       <Logo />
       <h1 className="text-4xl font-bold mb-4">Bienvenido</h1>
+      
+      <p className="text-lg mb-4">
+        ¡Hola! Cordial saludo a todos los auxiliares. Lamentamos informarles que la 
+        aplicación se encuentra fuera de servicio hasta nuevo aviso.
+      </p>
+
+      <p className="text-lg mb-4">
+        Pedimos por favor realizar su reporte interno por medio del grupo de WhatsApp.
+      </p>
+
       <p className="text-lg mb-8">
-        ¡Hola! Cordial saludo a todos los auxiliares, lamentamos informarles que la
-        aplicación se encuentra fuera de servicio hasta nuevo aviso. Pedimos por favor
-        realizar su reporte interno por medio del grupo de WhatsApp. Lo sentimos mucho
-        por las molestias.
+        Lo sentimos mucho por las molestias y agradecemos su comprensión.
       </p>
     </Background>
   );
